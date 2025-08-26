@@ -162,7 +162,7 @@ class _SimpleRequestsScreenState extends State<SimpleRequestsScreen> {
                   itemBuilder: (context, index) {
                     final request = filteredRequests[index];
                     return SimpleRequestCard(
-                      name: request.requester,
+                      name: 'Alice Johnson',
                       id: request.id,
                       status: request.status,
                       equipment: request.equipmentType,

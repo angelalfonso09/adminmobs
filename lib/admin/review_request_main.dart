@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'components/app_theme.dart';
-import 'approve_reject_request_screen.dart';
+import '../components/app_theme.dart';
+import 'screens/approve_reject_request_screen.dart';
 
 void main() => runApp(ApproveRejectRequestApp());
 

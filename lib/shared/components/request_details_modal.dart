@@ -95,36 +95,37 @@ class RequestDetailsModal extends StatelessWidget {
           ),
           
           // Review Request Button
-          Container(
-            padding: EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              border: Border(top: BorderSide(color: AppColors.divider)),
-            ),
-            child: SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).pop(); // Close modal
-                  Navigator.of(context).pushNamed('/review_request', arguments: request);
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  padding: EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+          if (request.status.toLowerCase() == 'pending')
+            Container(
+              padding: EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                border: Border(top: BorderSide(color: AppColors.divider)),
+              ),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // Close modal
+                    Navigator.of(context).pushNamed('/review_request', arguments: request);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.primary,
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
-                ),
-                child: Text(
-                  'Review Request',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
+                  child: Text(
+                    'Review Request',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
         ],
       ),
     );
