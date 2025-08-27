@@ -64,7 +64,7 @@ class AppTheme {
   static ThemeData get theme => ThemeData(
     primarySwatch: Colors.blue,
     useMaterial3: false,
-    appBarTheme: AppBarTheme(
+    appBarTheme: const AppBarTheme(
       backgroundColor: AppColors.primary,
       foregroundColor: Colors.white,
       titleTextStyle: TextStyle(
@@ -73,7 +73,7 @@ class AppTheme {
         color: Colors.white,
       ),
     ),
-    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       selectedItemColor: AppColors.primary,
       unselectedItemColor: Colors.grey,
       type: BottomNavigationBarType.fixed,

@@ -6,17 +6,17 @@ class RequesterDropdown extends StatelessWidget {
   final Function(String?) onChanged;
 
   const RequesterDropdown({
-    Key? key,
+    super.key,
     required this.requesters,
     this.selectedRequester,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade400),
         borderRadius: BorderRadius.circular(8),
@@ -24,12 +24,12 @@ class RequesterDropdown extends StatelessWidget {
       child: DropdownButtonHideUnderline(
         child: DropdownButton<String>(
           isExpanded: true,
-          hint: Text('Select a Requester'),
+          hint: const Text('Select a Requester'),
           value: selectedRequester,
           items: requesters
               .map((r) => DropdownMenuItem(
-                    child: Text(r),
                     value: r,
+                    child: Text(r),
                   ))
               .toList(),
           onChanged: onChanged,

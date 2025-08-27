@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../shared/components/app_theme.dart';
 
-class NotificationModal extends StatelessWidget {
+class AdminNotificationModal extends StatelessWidget {
   final String title;
   final String message;
   final IconData icon;
@@ -9,7 +10,7 @@ class NotificationModal extends StatelessWidget {
   final VoidCallback? onConfirm;
   final String confirmText;
 
-  const NotificationModal({
+  const AdminNotificationModal({
     super.key,
     required this.title,
     required this.message,
@@ -29,12 +30,12 @@ class NotificationModal extends StatelessWidget {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return NotificationModal(
+        return AdminNotificationModal(
           title: 'Request Approved',
           message: 'Request $requestId has been successfully approved.',
           icon: Icons.check_circle,
-          iconColor: const Color(0xFF517690),
-          backgroundColor: const Color(0xFF517690).withOpacity(0.1),
+          iconColor: AppColors.approved,
+          backgroundColor: AppColors.approved.withOpacity(0.1),
           onConfirm: onConfirm,
           confirmText: 'Continue',
         );
@@ -51,12 +52,12 @@ class NotificationModal extends StatelessWidget {
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return NotificationModal(
+        return AdminNotificationModal(
           title: 'Request Rejected',
           message: 'Request $requestId has been rejected.',
           icon: Icons.cancel,
-          iconColor: Colors.red,
-          backgroundColor: Colors.red.withOpacity(0.1),
+          iconColor: AppColors.rejected,
+          backgroundColor: AppColors.rejected.withOpacity(0.1),
           onConfirm: onConfirm,
           confirmText: 'Continue',
         );
@@ -82,16 +83,16 @@ class NotificationModal extends StatelessWidget {
           children: [
             // Icon with background
             Container(
-              width: 80,
-              height: 80,
+              width: 64,
+              height: 64,
               decoration: BoxDecoration(
                 color: backgroundColor,
                 shape: BoxShape.circle,
               ),
               child: Icon(
                 icon,
-                size: 40,
                 color: iconColor,
+                size: 32,
               ),
             ),
             const SizedBox(height: 24),
@@ -99,11 +100,7 @@ class NotificationModal extends StatelessWidget {
             // Title
             Text(
               title,
-              style: const TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
+              style: AppTextStyles.heading.copyWith(fontSize: 20),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 16),
@@ -111,10 +108,8 @@ class NotificationModal extends StatelessWidget {
             // Message
             Text(
               message,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey[600],
-                height: 1.4,
+              style: AppTextStyles.cardBody.copyWith(
+                color: AppColors.textSecondary,
               ),
               textAlign: TextAlign.center,
             ),
@@ -126,22 +121,19 @@ class NotificationModal extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).pop();
-                  if (onConfirm != null) {
-                    onConfirm!();
-                  }
+                  if (onConfirm != null) onConfirm!();
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: iconColor,
-                  foregroundColor: Colors.white,
+                  backgroundColor: AppColors.primary,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  elevation: 0,
                 ),
                 child: Text(
                   confirmText,
                   style: const TextStyle(
+                    color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),

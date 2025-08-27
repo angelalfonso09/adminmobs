@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import '../../../shared/components/app_theme.dart';
 
-class ConfirmationDialog extends StatelessWidget {
+class AdminConfirmationDialog extends StatelessWidget {
   final String title;
   final String message;
   final String confirmText;
@@ -9,7 +10,7 @@ class ConfirmationDialog extends StatelessWidget {
   final VoidCallback onConfirm;
   final VoidCallback? onCancel;
 
-  const ConfirmationDialog({
+  const AdminConfirmationDialog({
     super.key,
     required this.title,
     required this.message,
@@ -28,11 +29,11 @@ class ConfirmationDialog extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ConfirmationDialog(
+        return AdminConfirmationDialog(
           title: 'Approve Request',
           message: 'Are you sure you want to approve request $requestId?',
           confirmText: 'Approve',
-          confirmColor: const Color(0xFF517690),
+          confirmColor: AppColors.approved,
           onConfirm: onConfirm,
         );
       },
@@ -47,11 +48,11 @@ class ConfirmationDialog extends StatelessWidget {
     showDialog(
       context: context,
       builder: (BuildContext context) {
-        return ConfirmationDialog(
+        return AdminConfirmationDialog(
           title: 'Reject Request',
           message: 'Are you sure you want to reject request $requestId?',
           confirmText: 'Reject',
-          confirmColor: Colors.red,
+          confirmColor: AppColors.rejected,
           onConfirm: onConfirm,
         );
       },
@@ -66,31 +67,24 @@ class ConfirmationDialog extends StatelessWidget {
       ),
       title: Text(
         title,
-        style: const TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
+        style: AppTextStyles.heading.copyWith(fontSize: 20),
       ),
       content: Text(
         message,
-        style: TextStyle(
-          fontSize: 16,
-          color: Colors.grey[600],
+        style: AppTextStyles.cardBody.copyWith(
+          color: AppColors.textSecondary,
         ),
       ),
       actions: [
         TextButton(
           onPressed: () {
             Navigator.of(context).pop();
-            if (onCancel != null) {
-              onCancel!();
-            }
+            if (onCancel != null) onCancel!();
           },
           child: Text(
             cancelText,
-            style: TextStyle(
-              color: Colors.grey[600],
-              fontSize: 16,
+            style: const TextStyle(
+              color: AppColors.textSecondary,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -103,17 +97,11 @@ class ConfirmationDialog extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             backgroundColor: confirmColor,
             foregroundColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8),
-            ),
             elevation: 0,
           ),
           child: Text(
             confirmText,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w600,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.w600),
           ),
         ),
       ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_theme.dart';
+import '../../../shared/components/app_theme.dart';
 
 class ActionButtons extends StatelessWidget {
   final VoidCallback onApprove;

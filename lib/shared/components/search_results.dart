@@ -7,15 +7,15 @@ class SearchResults extends StatelessWidget {
   final String searchQuery;
 
   const SearchResults({
-    Key? key,
+    super.key,
     required this.requests,
     required this.searchQuery,
-  }) : super(key: key);
+  });
 
   Color getStatusColor(String status) {
     switch (status) {
       case 'Approved':
-        return Color(0xFF517690);
+        return const Color(0xFF517690);
       case 'Rejected':
         return Colors.red;
       case 'Pending':
@@ -29,7 +29,7 @@ class SearchResults extends StatelessWidget {
   Widget build(BuildContext context) {
     if (requests.isEmpty) {
       return Container(
-        padding: EdgeInsets.all(24),
+        padding: const EdgeInsets.all(24),
         child: Column(
           children: [
             Icon(
@@ -37,7 +37,7 @@ class SearchResults extends StatelessWidget {
               size: 64,
               color: Colors.grey[400],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Text(
               searchQuery.isNotEmpty ? 'No requests found' : 'Enter a request ID to search',
               style: TextStyle(
@@ -46,7 +46,7 @@ class SearchResults extends StatelessWidget {
                 color: Colors.grey[600],
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               searchQuery.isNotEmpty 
                 ? 'Try a different search term or adjust your filters'
@@ -66,12 +66,12 @@ class SearchResults extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           color: Colors.blue.shade50,
           child: Row(
             children: [
-              Icon(Icons.search, color: Colors.blue),
-              SizedBox(width: 8),
+              const Icon(Icons.search, color: Colors.blue),
+              const SizedBox(width: 8),
               Text(
                 'Found ${requests.length} result${requests.length != 1 ? 's' : ''}',
                 style: TextStyle(
@@ -84,7 +84,7 @@ class SearchResults extends StatelessWidget {
         ),
         Expanded(
           child: ListView.builder(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             itemCount: requests.length,
             itemBuilder: (context, index) {
               final request = requests[index];
@@ -100,7 +100,7 @@ class SearchResults extends StatelessWidget {
 class RequestResultCard extends StatelessWidget {
   final Request request;
 
-  const RequestResultCard({Key? key, required this.request}) : super(key: key);
+  const RequestResultCard({super.key, required this.request});
 
   void _showRequestDetailsModal(BuildContext context, Request request) {
     RequestDetailsModal.show(context, request);
@@ -109,7 +109,7 @@ class RequestResultCard extends StatelessWidget {
   Color getStatusColor(String status) {
     switch (status) {
       case 'Approved':
-        return Color(0xFF517690);
+        return const Color(0xFF517690);
       case 'Rejected':
         return Colors.red;
       case 'Pending':
@@ -122,10 +122,10 @@ class RequestResultCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 12),
       elevation: 2,
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -136,14 +136,14 @@ class RequestResultCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     request.requester,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: getStatusColor(request.status).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(16),
@@ -160,7 +160,7 @@ class RequestResultCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             
             // Request details
             _buildClickableDetailRow(context, 'Request ID', request.id, Icons.confirmation_number, request),
@@ -170,7 +170,7 @@ class RequestResultCard extends StatelessWidget {
             _buildDetailRow('Purpose', request.purpose, Icons.description),
             _buildDetailRow('Date', request.date, Icons.calendar_today),
             
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             
             // Action button
             SizedBox(
@@ -180,12 +180,12 @@ class RequestResultCard extends StatelessWidget {
                   // Show details modal
                   _showRequestDetailsModal(context, request);
                 },
-                icon: Icon(Icons.visibility),
-                label: Text('View Details'),
+                icon: const Icon(Icons.visibility),
+                label: const Text('View Details'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF517690),
+                  backgroundColor: const Color(0xFF517690),
                   foregroundColor: Colors.white,
-                  padding: EdgeInsets.symmetric(vertical: 12),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
                 ),
               ),
             ),
@@ -197,11 +197,11 @@ class RequestResultCard extends StatelessWidget {
 
   Widget _buildDetailRow(String label, String value, IconData icon) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.only(bottom: 8),
       child: Row(
         children: [
           Icon(icon, size: 16, color: Colors.grey[600]),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Text(
             '$label: ',
             style: TextStyle(
@@ -212,7 +212,7 @@ class RequestResultCard extends StatelessWidget {
           Expanded(
             child: Text(
               value,
-              style: TextStyle(color: Colors.black87),
+              style: const TextStyle(color: Colors.black87),
             ),
           ),
         ],
@@ -222,18 +222,18 @@ class RequestResultCard extends StatelessWidget {
 
   Widget _buildClickableDetailRow(BuildContext context, String label, String value, IconData icon, Request request) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.only(bottom: 8),
       child: InkWell(
         onTap: () {
           _showRequestDetailsModal(context, request);
         },
         borderRadius: BorderRadius.circular(8),
         child: Container(
-          padding: EdgeInsets.symmetric(vertical: 4, horizontal: 4),
+          padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 4),
           child: Row(
             children: [
-              Icon(icon, size: 16, color: Color(0xFF517690)),
-              SizedBox(width: 8),
+              Icon(icon, size: 16, color: const Color(0xFF517690)),
+              const SizedBox(width: 8),
               Text(
                 '$label: ',
                 style: TextStyle(
@@ -244,14 +244,14 @@ class RequestResultCard extends StatelessWidget {
               Expanded(
                 child: Text(
                   value,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color(0xFF517690),
                     fontWeight: FontWeight.w600,
                     decoration: TextDecoration.underline,
                   ),
                 ),
               ),
-              Icon(Icons.open_in_new, size: 16, color: Color(0xFF517690)),
+              const Icon(Icons.open_in_new, size: 16, color: Color(0xFF517690)),
             ],
           ),
         ),

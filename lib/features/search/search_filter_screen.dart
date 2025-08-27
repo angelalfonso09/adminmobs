@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../shared/components/search_bar.dart';
 import '../../shared/components/status_dropdown.dart';
 import '../../shared/components/search_results.dart';
 import '../../shared/models/request_data.dart';
 
 class SearchFilterScreen extends StatefulWidget {
+  const SearchFilterScreen({super.key});
+
   @override
-  _SearchFilterScreenState createState() => _SearchFilterScreenState();
+  SearchFilterScreenState createState() => SearchFilterScreenState();
 }
 
-class _SearchFilterScreenState extends State<SearchFilterScreen> {
+class SearchFilterScreenState extends State<SearchFilterScreen> {
   final TextEditingController _searchController = TextEditingController();
   String _selectedStatus = 'All';
   int _currentIndex = 2; // Start with "Search" tab selected
@@ -68,8 +71,8 @@ class _SearchFilterScreenState extends State<SearchFilterScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Filters reset! Showing all ${_searchResults.length} requests'),
-        backgroundColor: Color(0xFF517690),
-        duration: Duration(seconds: 2),
+        backgroundColor: const Color(0xFF517690),
+        duration: const Duration(seconds: 2),
       ),
     );
   }
@@ -78,12 +81,12 @@ class _SearchFilterScreenState extends State<SearchFilterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Search & Filter'),
+        title: Text('Search & Filter', style: GoogleFonts.montserrat()),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: Icon(Icons.refresh),
+            icon: const Icon(Icons.refresh),
             onPressed: _resetFilters,
             tooltip: 'Reset Filters',
           ),
@@ -93,7 +96,7 @@ class _SearchFilterScreenState extends State<SearchFilterScreen> {
         children: [
           // Search bar
           Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             color: Colors.grey.shade50,
             child: SearchTextField(
               controller: _searchController,
@@ -106,7 +109,7 @@ class _SearchFilterScreenState extends State<SearchFilterScreen> {
           Container(
             color: Colors.white,
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
                   StatusDropdown(
@@ -117,17 +120,17 @@ class _SearchFilterScreenState extends State<SearchFilterScreen> {
                       _performSearch();
                     },
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   SizedBox(
                     width: double.infinity,
                     child: OutlinedButton.icon(
                       onPressed: _resetFilters,
-                      icon: Icon(Icons.refresh),
-                      label: Text('Reset Filters'),
+                      icon: const Icon(Icons.refresh),
+                      label: const Text('Reset Filters', style: TextStyle(fontFamily: 'Montserrat')),
                       style: OutlinedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 12),
-                        side: BorderSide(color: Color(0xFF517690)),
-                        foregroundColor: Color(0xFF517690),
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        side: const BorderSide(color: Color(0xFF517690)),
+                        foregroundColor: const Color(0xFF517690),
                       ),
                     ),
                   ),
@@ -142,12 +145,12 @@ class _SearchFilterScreenState extends State<SearchFilterScreen> {
           // Results info
           if (_searchController.text.trim().isNotEmpty || _selectedStatus != 'All')
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               color: Colors.grey.shade50,
               child: Row(
                 children: [
                   Icon(Icons.info_outline, size: 16, color: Colors.grey[600]),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     'Found ${_searchResults.length} result${_searchResults.length != 1 ? 's' : ''} • Filters applied automatically',
                     style: TextStyle(
@@ -180,11 +183,11 @@ class _SearchFilterScreenState extends State<SearchFilterScreen> {
         },
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
-        selectedItemColor: Color(0xFF517690),
+        selectedItemColor: const Color(0xFF517690),
         unselectedItemColor: Colors.grey,
-        selectedLabelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-        unselectedLabelStyle: TextStyle(fontSize: 12),
-        items: [
+        selectedLabelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, fontFamily: 'Montserrat'),
+        unselectedLabelStyle: const TextStyle(fontSize: 12, fontFamily: 'Montserrat'),
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',
@@ -232,16 +235,6 @@ class _SearchFilterScreenState extends State<SearchFilterScreen> {
         Navigator.pushNamed(context, '/entry-logs');
         break;
     }
-  }
-  
-  void _showComingSoon(String feature) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('$feature feature coming soon!'),
-        duration: Duration(seconds: 2),
-        backgroundColor: Color(0xFF517690),
-      ),
-    );
   }
 
   @override

@@ -164,14 +164,14 @@ class RequestData {
     if (startDate != null) {
       filteredRequests = filteredRequests.where((request) {
         DateTime requestDate = DateTime.parse(request.date);
-        return requestDate.isAfter(startDate.subtract(Duration(days: 1)));
+        return requestDate.isAfter(startDate.subtract(const Duration(days: 1)));
       }).toList();
     }
 
     if (endDate != null) {
       filteredRequests = filteredRequests.where((request) {
         DateTime requestDate = DateTime.parse(request.date);
-        return requestDate.isBefore(endDate.add(Duration(days: 1)));
+        return requestDate.isBefore(endDate.add(const Duration(days: 1)));
       }).toList();
     }
 

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(AdminApp());
+void main() => runApp(const AdminApp());
 
 class AdminApp extends StatelessWidget {
+  const AdminApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,23 +13,25 @@ class AdminApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         useMaterial3: false,
       ),
-      home: SimpleRequestsScreen(),
+      home: const SimpleRequestsScreen(),
     );
   }
 }
 
 class SimpleRequestsScreen extends StatelessWidget {
+  const SimpleRequestsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('All Requests'),
+        title: const Text('All Requests'),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
       body: ListView(
-        padding: EdgeInsets.all(16),
-        children: [
+        padding: const EdgeInsets.all(16),
+        children: const [
           SimpleRequestCard(
             name: 'Maria Santos',
             id: 'REQ-001-A',
@@ -98,18 +102,18 @@ class SimpleRequestCard extends StatelessWidget {
   final String date;
 
   const SimpleRequestCard({
-    Key? key,
+    super.key,
     required this.name,
     required this.id,
     required this.status,
     required this.equipment,
     required this.date,
-  }) : super(key: key);
+  });
 
   Color getStatusColor(String status) {
     switch (status) {
       case 'Approved':
-        return Color(0xFF517690);
+        return const Color(0xFF517690);
       case 'Rejected':
         return Colors.red;
       case 'Pending':
@@ -122,9 +126,9 @@ class SimpleRequestCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.only(bottom: 12),
+      margin: const EdgeInsets.only(bottom: 12),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -133,13 +137,13 @@ class SimpleRequestCard extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
                     color: getStatusColor(status).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(12),
@@ -156,7 +160,7 @@ class SimpleRequestCard extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Request ID: $id',
               style: TextStyle(
@@ -164,12 +168,12 @@ class SimpleRequestCard extends StatelessWidget {
                 color: Colors.grey[600],
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Equipment: $equipment',
-              style: TextStyle(fontSize: 14),
+              style: const TextStyle(fontSize: 14),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               'Date: $date',
               style: TextStyle(

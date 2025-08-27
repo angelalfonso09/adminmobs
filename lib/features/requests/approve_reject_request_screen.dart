@@ -9,14 +9,14 @@ import '../../shared/components/action_buttons.dart';
 class ApproveRejectRequestScreen extends StatefulWidget {
   final String requestId;
   
-  const ApproveRejectRequestScreen({Key? key, this.requestId = "EP-2024-001"}) : super(key: key);
+  const ApproveRejectRequestScreen({super.key, this.requestId = "EP-2024-001"});
 
   @override
-  _ApproveRejectRequestScreenState createState() =>
-      _ApproveRejectRequestScreenState();
+  ApproveRejectRequestScreenState createState() =>
+      ApproveRejectRequestScreenState();
 }
 
-class _ApproveRejectRequestScreenState extends State<ApproveRejectRequestScreen> {
+class ApproveRejectRequestScreenState extends State<ApproveRejectRequestScreen> {
   final TextEditingController _adminCommentController = TextEditingController();
 
   @override
@@ -29,12 +29,12 @@ class _ApproveRejectRequestScreenState extends State<ApproveRejectRequestScreen>
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text('Request Approved'),
-        content: Text('You have approved the request.'),
+        title: const Text('Request Approved'),
+        content: const Text('You have approved the request.'),
         actions: [
           TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'))
+              child: const Text('OK'))
         ],
       ),
     );
@@ -44,12 +44,12 @@ class _ApproveRejectRequestScreenState extends State<ApproveRejectRequestScreen>
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        title: Text('Request Rejected'),
-        content: Text('You have rejected the request.'),
+        title: const Text('Request Rejected'),
+        content: const Text('You have rejected the request.'),
         actions: [
           TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'))
+              child: const Text('OK'))
         ],
       ),
     );
@@ -78,20 +78,20 @@ class _ApproveRejectRequestScreenState extends State<ApproveRejectRequestScreen>
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Request Details'),
+        title: const Text('Request Details'),
         backgroundColor: AppColors.primary,
         foregroundColor: Colors.white,
       ),
       backgroundColor: AppColors.background,
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Card(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12)),
           elevation: 4,
           color: Colors.white,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -102,7 +102,7 @@ class _ApproveRejectRequestScreenState extends State<ApproveRejectRequestScreen>
                   role: requestData['userRole'] as String,
                 ),
                 
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
 
                 // Request info section
                 RequestInfoSection(
@@ -112,7 +112,7 @@ class _ApproveRejectRequestScreenState extends State<ApproveRejectRequestScreen>
                   securedBy: requestData['securedBy'] as String,
                 ),
 
-                Divider(height: 32, thickness: 1, color: AppColors.divider),
+                const Divider(height: 32, thickness: 1, color: AppColors.divider),
 
                 // Equipment details and entry schedule
                 RequestDetailsSection(
@@ -125,7 +125,7 @@ class _ApproveRejectRequestScreenState extends State<ApproveRejectRequestScreen>
                   entryScheduleLocation: requestData['entryScheduleLocation'] as String,
                 ),
 
-                Divider(height: 32, thickness: 1, color: AppColors.divider),
+                const Divider(height: 32, thickness: 1, color: AppColors.divider),
 
                 // Admin notes section
                 AdminNotesSection(
@@ -133,7 +133,7 @@ class _ApproveRejectRequestScreenState extends State<ApproveRejectRequestScreen>
                   commentController: _adminCommentController,
                 ),
 
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
 
                 // Action buttons
                 ActionButtons(

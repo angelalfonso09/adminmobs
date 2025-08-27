@@ -8,12 +8,12 @@ class RequestInfoSection extends StatelessWidget {
   final String securedBy;
 
   const RequestInfoSection({
-    Key? key,
+    super.key,
     required this.requestId,
     required this.status,
     required this.submissionDate,
     required this.securedBy,
-  }) : super(key: key);
+  });
 
   Color _getStatusColor(String status) {
     switch (status.toLowerCase()) {
@@ -33,7 +33,7 @@ class RequestInfoSection extends StatelessWidget {
     return Column(
       children: [
         // Request ID and Status Row
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
@@ -46,7 +46,7 @@ class RequestInfoSection extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -59,10 +59,10 @@ class RequestInfoSection extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 12),
+        const SizedBox(height: 12),
 
         // Submission Date and Secured By Row
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
@@ -75,7 +75,7 @@ class RequestInfoSection extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 4),
+        const SizedBox(height: 4),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

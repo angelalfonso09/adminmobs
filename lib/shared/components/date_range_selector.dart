@@ -8,12 +8,12 @@ class DateRangeSelector extends StatelessWidget {
   final Function(DateTime?) onEndDateChanged;
 
   const DateRangeSelector({
-    Key? key,
+    super.key,
     this.startDate,
     this.endDate,
     required this.onStartDateChanged,
     required this.onEndDateChanged,
-  }) : super(key: key);
+  });
 
   Future<void> _pickStartDate(BuildContext context) async {
     final initialDate = startDate ?? DateTime.now();
@@ -45,7 +45,7 @@ class DateRangeSelector extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade400),
         borderRadius: BorderRadius.circular(8),
@@ -53,11 +53,11 @@ class DateRangeSelector extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Date Range',
+          const Text('Date Range',
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
-          SizedBox(height: 12),
-          Text('Start Date'),
-          SizedBox(height: 6),
+          const SizedBox(height: 12),
+          const Text('Start Date'),
+          const SizedBox(height: 6),
           InkWell(
             onTap: () => _pickStartDate(context),
             child: Container(
@@ -67,7 +67,7 @@ class DateRangeSelector extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Text(
                 startDate != null
                     ? DateFormat('yyyy-MM-dd').format(startDate!)
@@ -79,9 +79,9 @@ class DateRangeSelector extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 12),
-          Text('End Date'),
-          SizedBox(height: 6),
+          const SizedBox(height: 12),
+          const Text('End Date'),
+          const SizedBox(height: 6),
           InkWell(
             onTap: () => _pickEndDate(context),
             child: Container(
@@ -91,7 +91,7 @@ class DateRangeSelector extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
               ),
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.symmetric(horizontal: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 12),
               child: Text(
                 endDate != null
                     ? DateFormat('yyyy-MM-dd').format(endDate!)

@@ -4,7 +4,7 @@ import '../models/request_data.dart';
 class RequestDetailsModal extends StatelessWidget {
   final Request request;
 
-  const RequestDetailsModal({Key? key, required this.request}) : super(key: key);
+  const RequestDetailsModal({super.key, required this.request});
 
   static void show(BuildContext context, Request request) {
     showModalBottomSheet(
@@ -18,7 +18,7 @@ class RequestDetailsModal extends StatelessWidget {
   Color getStatusColor(String status) {
     switch (status) {
       case 'Approved':
-        return Color(0xFF517690);
+        return const Color(0xFF517690);
       case 'Rejected':
         return Colors.red;
       case 'Pending':
@@ -32,7 +32,7 @@ class RequestDetailsModal extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.9,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -40,7 +40,7 @@ class RequestDetailsModal extends StatelessWidget {
         children: [
           // Handle bar
           Container(
-            margin: EdgeInsets.only(top: 8),
+            margin: const EdgeInsets.only(top: 8),
             width: 40,
             height: 4,
             decoration: BoxDecoration(
@@ -51,14 +51,14 @@ class RequestDetailsModal extends StatelessWidget {
           
           // Header
           Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               border: Border(bottom: BorderSide(color: Colors.grey.shade300)),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Request Details',
                   style: TextStyle(
                     fontSize: 22,
@@ -66,7 +66,7 @@ class RequestDetailsModal extends StatelessWidget {
                   ),
                 ),
                 IconButton(
-                  icon: Icon(Icons.close),
+                  icon: const Icon(Icons.close),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ],
@@ -76,7 +76,7 @@ class RequestDetailsModal extends StatelessWidget {
           // Content
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(24),
+              padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
                   // User Avatar and Info
@@ -84,22 +84,22 @@ class RequestDetailsModal extends StatelessWidget {
                     children: [
                       CircleAvatar(
                         radius: 28,
-                        backgroundColor: Color(0xFF517690).withOpacity(0.1),
-                        child: Icon(Icons.person, size: 35, color: Color(0xFF517690)),
+                        backgroundColor: const Color(0xFF517690).withOpacity(0.1),
+                        child: const Icon(Icons.person, size: 35, color: Color(0xFF517690)),
                       ),
-                      SizedBox(width: 16),
+                      const SizedBox(width: 16),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               request.requester,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 4),
+                            const SizedBox(height: 4),
                             Text(
                               'Requester',
                               style: TextStyle(
@@ -111,7 +111,7 @@ class RequestDetailsModal extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                         decoration: BoxDecoration(
                           color: getStatusColor(request.status).withOpacity(0.1),
                           borderRadius: BorderRadius.circular(16),
@@ -129,7 +129,7 @@ class RequestDetailsModal extends StatelessWidget {
                     ],
                   ),
                   
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
                   
                   // Request Information
                   _buildDetailSection('Request Information', [
@@ -138,7 +138,7 @@ class RequestDetailsModal extends StatelessWidget {
                     _buildDetailItem('Secured By', request.securedBy, Icons.event_available),
                   ]),
                   
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   
                   // Equipment Details
                   _buildDetailSection('Equipment Details', [
@@ -154,7 +154,7 @@ class RequestDetailsModal extends StatelessWidget {
           
           // Action Buttons
           Container(
-            padding: EdgeInsets.all(24),
+            padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
               border: Border(top: BorderSide(color: Colors.grey.shade300)),
             ),
@@ -163,15 +163,15 @@ class RequestDetailsModal extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () => Navigator.of(context).pop(),
-                    icon: Icon(Icons.close),
-                    label: Text('Close'),
+                    icon: const Icon(Icons.close),
+                    label: const Text('Close'),
                     style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      side: BorderSide(color: Colors.grey),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      side: const BorderSide(color: Colors.grey),
                     ),
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButton.icon(
                     onPressed: () {
@@ -180,16 +180,16 @@ class RequestDetailsModal extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('Opening review for ${request.id}'),
-                          backgroundColor: Color(0xFF517690),
+                          backgroundColor: const Color(0xFF517690),
                         ),
                       );
                     },
-                    icon: Icon(Icons.edit),
-                    label: Text('Review Request'),
+                    icon: const Icon(Icons.edit),
+                    label: const Text('Review Request'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xFF517690),
+                      backgroundColor: const Color(0xFF517690),
                       foregroundColor: Colors.white,
-                      padding: EdgeInsets.symmetric(vertical: 16),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
                     ),
                   ),
                 ),
@@ -204,7 +204,7 @@ class RequestDetailsModal extends StatelessWidget {
   Widget _buildDetailSection(String title, List<Widget> items) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade300),
         borderRadius: BorderRadius.circular(12),
@@ -214,13 +214,13 @@ class RequestDetailsModal extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
               color: Color(0xFF517690),
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           ...items,
         ],
       ),
@@ -229,19 +229,19 @@ class RequestDetailsModal extends StatelessWidget {
 
   Widget _buildDetailItem(String label, String value, IconData icon) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 12),
+      padding: const EdgeInsets.only(bottom: 12),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: Color(0xFF517690).withOpacity(0.1),
+              color: const Color(0xFF517690).withOpacity(0.1),
               borderRadius: BorderRadius.circular(8),
             ),
-            child: Icon(icon, size: 16, color: Color(0xFF517690)),
+            child: Icon(icon, size: 16, color: const Color(0xFF517690)),
           ),
-          SizedBox(width: 12),
+          const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -254,10 +254,10 @@ class RequestDetailsModal extends StatelessWidget {
                     fontSize: 13,
                   ),
                 ),
-                SizedBox(height: 2),
+                const SizedBox(height: 2),
                 Text(
                   value,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Colors.black87,
                     fontSize: 15,
                   ),

@@ -7,11 +7,11 @@ class RequestHeader extends StatelessWidget {
   final String role;
 
   const RequestHeader({
-    Key? key,
+    super.key,
     required this.name,
     required this.email,
     required this.role,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class RequestHeader extends StatelessWidget {
               fit: BoxFit.cover,
               errorBuilder: (context, error, stackTrace) {
                 // Fallback to icon if image fails to load
-                return Icon(
+                return const Icon(
                   Icons.person, 
                   size: 40, 
                   color: AppColors.primary
@@ -37,7 +37,7 @@ class RequestHeader extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(width: 16),
+        const SizedBox(width: 16),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +46,7 @@ class RequestHeader extends StatelessWidget {
                 name,
                 style: AppTextStyles.cardTitle.copyWith(fontSize: 20),
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 email,
                 style: AppTextStyles.cardMeta,

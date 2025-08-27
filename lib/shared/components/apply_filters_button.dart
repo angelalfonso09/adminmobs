@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ApplyFiltersButton extends StatelessWidget {
   final VoidCallback onPressed;
 
-  const ApplyFiltersButton({Key? key, required this.onPressed}) : super(key: key);
+  const ApplyFiltersButton({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +14,12 @@ class ApplyFiltersButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blue,
           foregroundColor: Colors.white,
-          padding: EdgeInsets.symmetric(vertical: 16),
+          padding: const EdgeInsets.symmetric(vertical: 16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
           ),
         ),
-        child: Text(
+        child: const Text(
           'Apply Filters',
           style: TextStyle(
             fontSize: 16,

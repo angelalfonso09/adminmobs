@@ -4,12 +4,12 @@ import '../models/entry_log.dart';
 class EntryLogCard extends StatelessWidget {
   final EntryLog log;
 
-  const EntryLogCard({Key? key, required this.log}) : super(key: key);
+  const EntryLogCard({super.key, required this.log});
 
   Color getStatusColor(String status) {
     switch (status) {
       case 'Approved':
-        return Color(0xFF517690);
+        return const Color(0xFF517690);
       case 'Rejected':
         return Colors.red;
       case 'Pending':
@@ -37,11 +37,11 @@ class EntryLogCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+      margin: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
       elevation: 2,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -53,26 +53,26 @@ class EntryLogCard extends StatelessWidget {
                   child: Row(
                     children: [
                       CircleAvatar(
-                        backgroundColor: Color(0xFF517690).withOpacity(0.1),
+                        backgroundColor: const Color(0xFF517690).withOpacity(0.1),
                         child: Icon(
                           getRoleIcon(log.role), 
-                          color: Color(0xFF517690),
+                          color: const Color(0xFF517690),
                           size: 20,
                         ),
                       ),
-                      SizedBox(width: 12),
+                      const SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
                               log.name,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontSize: 16,
                               ),
                             ),
-                            SizedBox(height: 2),
+                            const SizedBox(height: 2),
                             Text(
                               log.role,
                               style: TextStyle(
@@ -88,7 +88,7 @@ class EntryLogCard extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: getStatusColor(log.status).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(16),
@@ -106,11 +106,11 @@ class EntryLogCard extends StatelessWidget {
               ],
             ),
             
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             
             // Entry details
             Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.grey.shade50,
                 borderRadius: BorderRadius.circular(8),
@@ -118,11 +118,11 @@ class EntryLogCard extends StatelessWidget {
               child: Column(
                 children: [
                   _buildDetailRow(Icons.access_time, 'Time', log.time),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   _buildDetailRow(Icons.location_on, 'Location', log.location),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   _buildDetailRow(Icons.calendar_today, 'Date', log.date),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   _buildDetailRow(Icons.confirmation_number, 'Log ID', log.id),
                 ],
               ),
@@ -137,7 +137,7 @@ class EntryLogCard extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, size: 16, color: Colors.grey[600]),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Text(
           '$label: ',
           style: TextStyle(
@@ -149,7 +149,7 @@ class EntryLogCard extends StatelessWidget {
         Expanded(
           child: Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black87,
               fontSize: 13,
             ),

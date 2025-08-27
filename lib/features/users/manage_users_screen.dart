@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../shared/models/user.dart';
 import '../../shared/components/user_card.dart';
 
 class ManageUsersScreen extends StatefulWidget {
+  const ManageUsersScreen({super.key});
+
   @override
-  _ManageUsersScreenState createState() => _ManageUsersScreenState();
+  ManageUsersScreenState createState() => ManageUsersScreenState();
 }
 
-class _ManageUsersScreenState extends State<ManageUsersScreen> {
+class ManageUsersScreenState extends State<ManageUsersScreen> {
   final TextEditingController _searchController = TextEditingController();
   String selectedRoleFilter = 'All';
   String selectedStatusFilter = 'All';
@@ -61,7 +64,19 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
   }
 
   void _onSearchChanged(String query) {
-    _updateFilteredUsers();
+    setState(() {
+      filteredUsers = UserData.searchUsers(query);
+      
+      // Apply role filter if selected
+      if (selectedRoleFilter != 'All') {
+        filteredUsers = filteredUsers.where((user) => user.role == selectedRoleFilter).toList();
+      }
+      
+      // Apply status filter if selected
+      if (selectedStatusFilter != 'All') {
+        filteredUsers = filteredUsers.where((user) => user.status == selectedStatusFilter).toList();
+      }
+    });
   }
 
   void _editUser(int index) {
@@ -71,7 +86,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          title: Row(
+          title: const Row(
             children: [
               Icon(Icons.edit, color: Color(0xFF517690)),
               SizedBox(width: 8),
@@ -82,14 +97,14 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('User: ${user.name}', style: TextStyle(fontWeight: FontWeight.w600)),
-              SizedBox(height: 4),
+              Text('User: ${user.name}', style: const TextStyle(fontWeight: FontWeight.w600)),
+              const SizedBox(height: 4),
               Text('Email: ${user.email}'),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text('Role: ${user.role}'),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text('Department: ${user.department}'),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text('Edit functionality would be implemented here.', 
                    style: TextStyle(fontStyle: FontStyle.italic, color: Colors.grey[600])),
             ],
@@ -97,7 +112,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -105,12 +120,12 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Edit functionality for ${user.name} coming soon!'),
-                    backgroundColor: Color(0xFF517690),
+                    backgroundColor: const Color(0xFF517690),
                   ),
                 );
               },
-              style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF517690)),
-              child: Text('Save Changes'),
+              style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFF517690)),
+              child: const Text('Save Changes'),
             ),
           ],
         );
@@ -134,7 +149,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                 user.status == 'Active' ? Icons.toggle_off : Icons.toggle_on,
                 color: user.status == 'Active' ? Colors.red : Colors.green,
               ),
-              SizedBox(width: 8),
+              const SizedBox(width: 8),
               Text('${actionWord.substring(0, 1).toUpperCase()}${actionWord.substring(1)} ${user.role}'),
             ],
           ),
@@ -143,9 +158,9 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Are you sure you want to $actionWord this ${user.role.toLowerCase()}?'),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               Container(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.grey.shade100,
                   borderRadius: BorderRadius.circular(8),
@@ -153,8 +168,8 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('User Details:', style: TextStyle(fontWeight: FontWeight.bold)),
-                    SizedBox(height: 4),
+                    const Text('User Details:', style: TextStyle(fontWeight: FontWeight.bold)),
+                    const SizedBox(height: 4),
                     Text('Name: ${user.name}'),
                     Text('Email: ${user.email}'),
                     Text('Role: ${user.role}'),
@@ -163,10 +178,10 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 12),
+              const SizedBox(height: 12),
               if (user.status == 'Active')
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.red.shade50,
                     borderRadius: BorderRadius.circular(8),
@@ -174,8 +189,8 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.warning, color: Colors.red, size: 20),
-                      SizedBox(width: 8),
+                      const Icon(Icons.warning, color: Colors.red, size: 20),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           'This ${user.role.toLowerCase()} will lose access to the system immediately.',
@@ -187,7 +202,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                 )
               else
                 Container(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
                     color: Colors.green.shade50,
                     borderRadius: BorderRadius.circular(8),
@@ -195,8 +210,8 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                   ),
                   child: Row(
                     children: [
-                      Icon(Icons.check_circle, color: Colors.green, size: 20),
-                      SizedBox(width: 8),
+                      const Icon(Icons.check_circle, color: Colors.green, size: 20),
+                      const SizedBox(width: 8),
                       Expanded(
                         child: Text(
                           'This ${user.role.toLowerCase()} will regain access to the system.',
@@ -211,7 +226,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -234,7 +249,11 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
     UserData.updateUserStatus(user.id, newStatus);
     
     // Refresh the filtered users list
-    _updateFilteredUsers();
+    setState(() {
+      filteredUsers = UserData.getAllUsers();
+      // Reapply filters
+      _onSearchChanged(_searchController.text);
+    });
     
     // Show success message
     ScaffoldMessenger.of(context).showSnackBar(
@@ -245,17 +264,17 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
               newStatus == 'Active' ? Icons.check_circle : Icons.cancel,
               color: Colors.white,
             ),
-            SizedBox(width: 8),
+            const SizedBox(width: 8),
             Expanded(
               child: Text(
                 '${user.name} (${user.role}) has been ${newStatus.toLowerCase()}',
-                style: TextStyle(fontWeight: FontWeight.w500),
+                style: const TextStyle(fontWeight: FontWeight.w500),
               ),
             ),
           ],
         ),
         backgroundColor: newStatus == 'Active' ? Colors.green : Colors.red,
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
         action: SnackBarAction(
           label: 'UNDO',
           textColor: Colors.white,
@@ -266,8 +285,8 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('Status change undone for ${user.name}'),
-                backgroundColor: Color(0xFF517690),
-                duration: Duration(seconds: 2),
+                backgroundColor: const Color(0xFF517690),
+                duration: const Duration(seconds: 2),
               ),
             );
           },
@@ -278,25 +297,15 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
 
   void _handleNavigation(int index) {
     switch (index) {
-      case 0:
-        // Navigate to Home screen
-        Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-        break;
-      case 1:
-        // Navigate to All Requests screen
-        Navigator.pushNamedAndRemoveUntil(context, '/requests', (route) => false);
-        break;
-      case 2:
-        // Navigate to Search screen
-        Navigator.pushNamed(context, '/search');
-        break;
-      case 3:
-        // Already on Users screen
-        break;
-      case 4:
-        // Navigate to Entry Logs screen
-        Navigator.pushNamed(context, '/entry-logs');
-        break;
+          case 0:
+            Navigator.pushNamedAndRemoveUntil(context, '/requests', (route) => false);
+            break;
+          case 1:
+            Navigator.pushNamed(context, '/search');
+            break;
+          case 2:
+            // Already on Users screen
+            break;
     }
   }
 
@@ -304,8 +313,8 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('$feature feature coming soon!'),
-        duration: Duration(seconds: 2),
-        backgroundColor: Color(0xFF517690),
+        duration: const Duration(seconds: 2),
+        backgroundColor: const Color(0xFF517690),
       ),
     );
   }
@@ -316,7 +325,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          title: Row(
+          title: const Row(
             children: [
               Icon(Icons.settings, color: Color(0xFF517690)),
               SizedBox(width: 8),
@@ -326,39 +335,39 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Choose a bulk action to perform:'),
-              SizedBox(height: 16),
+              const Text('Choose a bulk action to perform:'),
+              const SizedBox(height: 16),
               ListTile(
-                leading: Icon(Icons.check_circle, color: Colors.green),
-                title: Text('Enable All Users'),
-                subtitle: Text('Activate all inactive users'),
+                leading: const Icon(Icons.check_circle, color: Colors.green),
+                title: const Text('Enable All Users'),
+                subtitle: const Text('Activate all inactive users'),
                 onTap: () {
                   Navigator.pop(context);
                   _confirmBulkAction('enable');
                 },
               ),
               ListTile(
-                leading: Icon(Icons.cancel, color: Colors.red),
-                title: Text('Disable All Users'),
-                subtitle: Text('Deactivate all active users'),
+                leading: const Icon(Icons.cancel, color: Colors.red),
+                title: const Text('Disable All Users'),
+                subtitle: const Text('Deactivate all active users'),
                 onTap: () {
                   Navigator.pop(context);
                   _confirmBulkAction('disable');
                 },
               ),
               ListTile(
-                leading: Icon(Icons.admin_panel_settings, color: Colors.purple),
-                title: Text('Enable All Admins'),
-                subtitle: Text('Activate all inactive admin users'),
+                leading: const Icon(Icons.admin_panel_settings, color: Colors.purple),
+                title: const Text('Enable All Admins'),
+                subtitle: const Text('Activate all inactive admin users'),
                 onTap: () {
                   Navigator.pop(context);
                   _confirmBulkAction('enable_admins');
                 },
               ),
               ListTile(
-                leading: Icon(Icons.people, color: Color(0xFF517690)),
-                title: Text('Enable All Regular Users'),
-                subtitle: Text('Activate all inactive regular users'),
+                leading: const Icon(Icons.people, color: Color(0xFF517690)),
+                title: const Text('Enable All Regular Users'),
+                subtitle: const Text('Activate all inactive regular users'),
                 onTap: () {
                   Navigator.pop(context);
                   _confirmBulkAction('enable_users');
@@ -369,7 +378,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
           ],
         );
@@ -380,7 +389,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
   void _confirmBulkAction(String action) {
     String title = '';
     String description = '';
-    Color color = Color(0xFF517690);
+    Color color = const Color(0xFF517690);
     
     switch (action) {
       case 'enable':
@@ -401,7 +410,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
       case 'enable_users':
         title = 'Enable All Regular Users';
         description = 'This will activate all inactive regular Users only.';
-        color = Color(0xFF517690);
+        color = const Color(0xFF517690);
         break;
     }
 
@@ -410,7 +419,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          title: Row(
+          title: const Row(
             children: [
               Icon(Icons.warning, color: Colors.orange),
               SizedBox(width: 8),
@@ -421,12 +430,12 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Action: $title', style: TextStyle(fontWeight: FontWeight.bold)),
-              SizedBox(height: 8),
+              Text('Action: $title', style: const TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8),
               Text(description),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Container(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.orange.shade50,
                   borderRadius: BorderRadius.circular(8),
@@ -434,8 +443,8 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.info, color: Colors.orange, size: 20),
-                    SizedBox(width: 8),
+                    const Icon(Icons.info, color: Colors.orange, size: 20),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'This action cannot be undone automatically. You\'ll need to manually change individual user statuses if needed.',
@@ -450,7 +459,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -458,7 +467,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                 _performBulkAction(action);
               },
               style: ElevatedButton.styleFrom(backgroundColor: color),
-              child: Text('Confirm'),
+              child: const Text('Confirm'),
             ),
           ],
         );
@@ -510,8 +519,8 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Bulk action completed. $updatedCount user(s) updated.'),
-        backgroundColor: Color(0xFF517690),
-        duration: Duration(seconds: 3),
+        backgroundColor: const Color(0xFF517690),
+        duration: const Duration(seconds: 3),
       ),
     );
   }
@@ -522,7 +531,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          title: Row(
+          title: const Row(
             children: [
               Icon(Icons.restore, color: Colors.green),
               SizedBox(width: 8),
@@ -532,30 +541,30 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text('Choose users to restore from archive:'),
-              SizedBox(height: 16),
+              const Text('Choose users to restore from archive:'),
+              const SizedBox(height: 16),
               ListTile(
-                leading: Icon(Icons.person_add, color: Colors.green),
-                title: Text('Restore All Archived Users'),
-                subtitle: Text('Restore all archived users to active status'),
+                leading: const Icon(Icons.person_add, color: Colors.green),
+                title: const Text('Restore All Archived Users'),
+                subtitle: const Text('Restore all archived users to active status'),
                 onTap: () {
                   Navigator.pop(context);
                   _confirmRestoreAction('restore_all');
                 },
               ),
               ListTile(
-                leading: Icon(Icons.admin_panel_settings, color: Colors.purple),
-                title: Text('Restore Archived Admins Only'),
-                subtitle: Text('Restore only archived admin users'),
+                leading: const Icon(Icons.admin_panel_settings, color: Colors.purple),
+                title: const Text('Restore Archived Admins Only'),
+                subtitle: const Text('Restore only archived admin users'),
                 onTap: () {
                   Navigator.pop(context);
                   _confirmRestoreAction('restore_admins');
                 },
               ),
               ListTile(
-                leading: Icon(Icons.people, color: Color(0xFF517690)),
-                title: Text('Restore Archived Users Only'),
-                subtitle: Text('Restore only archived regular users'),
+                leading: const Icon(Icons.people, color: Color(0xFF517690)),
+                title: const Text('Restore Archived Users Only'),
+                subtitle: const Text('Restore only archived regular users'),
                 onTap: () {
                   Navigator.pop(context);
                   _confirmRestoreAction('restore_users');
@@ -566,7 +575,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
           ],
         );
@@ -598,7 +607,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-          title: Row(
+          title: const Row(
             children: [
               Icon(Icons.info, color: Colors.blue),
               SizedBox(width: 8),
@@ -609,12 +618,12 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('Action: $title', style: TextStyle(fontWeight: FontWeight.bold)),
-              SizedBox(height: 8),
+              Text('Action: $title', style: const TextStyle(fontWeight: FontWeight.bold)),
+              const SizedBox(height: 8),
               Text(description),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Container(
-                padding: EdgeInsets.all(12),
+                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
                   color: Colors.green.shade50,
                   borderRadius: BorderRadius.circular(8),
@@ -622,8 +631,8 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                 ),
                 child: Row(
                   children: [
-                    Icon(Icons.check_circle, color: Colors.green, size: 20),
-                    SizedBox(width: 8),
+                    const Icon(Icons.check_circle, color: Colors.green, size: 20),
+                    const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         'Restored users will regain access to the system immediately.',
@@ -638,7 +647,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: Text('Cancel'),
+              child: const Text('Cancel'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -646,7 +655,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                 _performRestoreAction(action);
               },
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-              child: Text('Restore'),
+              child: const Text('Restore'),
             ),
           ],
         );
@@ -691,7 +700,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
       SnackBar(
         content: Text('Restore completed. $restoredCount user(s) restored from archive.'),
         backgroundColor: Colors.green,
-        duration: Duration(seconds: 3),
+        duration: const Duration(seconds: 3),
       ),
     );
   }
@@ -702,14 +711,14 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
       appBar: AppBar(
         title: Row(
           children: [
-            Text(showArchive ? 'User Archive' : 'Manage Users'),
+            Text(showArchive ? 'User Archive' : 'Manage Users', style: GoogleFonts.montserrat()),
             if (showArchive) ...[
-              SizedBox(width: 8),
-              Icon(Icons.archive, size: 20),
+              const SizedBox(width: 8),
+              const Icon(Icons.archive, size: 20),
             ],
           ],
         ),
-        backgroundColor: showArchive ? Colors.grey.shade700 : Color(0xFF517690),
+        backgroundColor: showArchive ? Colors.grey.shade700 : const Color(0xFF517690),
         foregroundColor: Colors.white,
         actions: [
           IconButton(
@@ -728,7 +737,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
           ),
           if (!showArchive)
             IconButton(
-              icon: Icon(Icons.person_add),
+              icon: const Icon(Icons.person_add),
               onPressed: () {
                 _showComingSoon('Add User');
               },
@@ -739,7 +748,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
         children: [
           // Search bar
           Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             color: Colors.grey.shade50,
             child: TextField(
               controller: _searchController,
@@ -757,9 +766,9 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Color(0xFF517690)),
+                  borderSide: const BorderSide(color: Color(0xFF517690)),
                 ),
-                contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 hintText: showArchive 
                   ? 'Search archived users by name, email, or department...'
                   : 'Search users by name, email, or department...',
@@ -780,7 +789,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
 
           // User status summary
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             color: Colors.white,
             child: Row(
               children: [
@@ -793,7 +802,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                       Icons.check_circle,
                     ),
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: _buildStatusSummaryCard(
                       'Inactive Users',
@@ -802,12 +811,12 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                       Icons.cancel,
                     ),
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: _buildStatusSummaryCard(
                       'Total Users',
                       UserData.getAllUsers().length,
-                      Color(0xFF517690),
+                      const Color(0xFF517690),
                       Icons.people,
                     ),
                   ),
@@ -820,7 +829,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                       Icons.admin_panel_settings,
                     ),
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: _buildStatusSummaryCard(
                       'Archived Users',
@@ -829,7 +838,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                       Icons.person,
                     ),
                   ),
-                  SizedBox(width: 12),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: _buildStatusSummaryCard(
                       'Total Archived',
@@ -845,7 +854,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
 
           // Filter dropdowns
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             color: Colors.grey.shade50,
             child: Row(
               children: [
@@ -853,21 +862,21 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Role', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12)),
-                      SizedBox(height: 4),
+                      const Text('Role', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12)),
+                      const SizedBox(height: 4),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                         decoration: BoxDecoration(
-                          border: Border.all(color: Color(0xFF517690)),
+                          border: Border.all(color: const Color(0xFF517690)),
                           borderRadius: BorderRadius.circular(8),
                           color: Colors.white,
                         ),
                         child: DropdownButton<String>(
                           value: selectedRoleFilter,
                           isExpanded: true,
-                          underline: SizedBox(),
-                          icon: Icon(Icons.arrow_drop_down, color: Color(0xFF517690)),
-                          style: TextStyle(color: Color(0xFF517690), fontWeight: FontWeight.w600),
+                          underline: const SizedBox(),
+                          icon: const Icon(Icons.arrow_drop_down, color: Color(0xFF517690)),
+                          style: const TextStyle(color: Color(0xFF517690), fontWeight: FontWeight.w600),
                           items: roles.map((String value) => DropdownMenuItem<String>(
                                 value: value,
                                 child: Text(value),
@@ -884,26 +893,26 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                   ),
                 ),
                 if (!showArchive) ...[
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Status', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12)),
-                        SizedBox(height: 4),
+                        const Text('Status', style: TextStyle(fontWeight: FontWeight.w600, fontSize: 12)),
+                        const SizedBox(height: 4),
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
                           decoration: BoxDecoration(
-                            border: Border.all(color: Color(0xFF517690)),
+                            border: Border.all(color: const Color(0xFF517690)),
                             borderRadius: BorderRadius.circular(8),
                             color: Colors.white,
                           ),
                           child: DropdownButton<String>(
                             value: selectedStatusFilter,
                             isExpanded: true,
-                            underline: SizedBox(),
-                            icon: Icon(Icons.arrow_drop_down, color: Color(0xFF517690)),
-                            style: TextStyle(color: Color(0xFF517690), fontWeight: FontWeight.w600),
+                            underline: const SizedBox(),
+                            icon: const Icon(Icons.arrow_drop_down, color: Color(0xFF517690)),
+                            style: const TextStyle(color: Color(0xFF517690), fontWeight: FontWeight.w600),
                             items: statuses.map((String value) => DropdownMenuItem<String>(
                                   value: value,
                                   child: Text(value),
@@ -920,10 +929,10 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                     ),
                   ),
                 ] else ...[
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
                       decoration: BoxDecoration(
                         color: Colors.grey.shade100,
                         borderRadius: BorderRadius.circular(8),
@@ -932,7 +941,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                       child: Row(
                         children: [
                           Icon(Icons.info_outline, color: Colors.grey.shade600, size: 16),
-                          SizedBox(width: 8),
+                          const SizedBox(width: 8),
                           Text(
                             'Showing archived users only',
                             style: TextStyle(
@@ -953,12 +962,12 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
           // Results info
           if (filteredUsers.isNotEmpty)
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               color: Colors.grey.shade50,
               child: Row(
                 children: [
                   Icon(Icons.people, size: 16, color: Colors.grey[600]),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     'Showing ${filteredUsers.length} user${filteredUsers.length != 1 ? 's' : ''}',
                     style: TextStyle(
@@ -987,7 +996,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                           size: 64,
                           color: Colors.grey[400],
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Text(
                           showArchive
                             ? 'No archived users found'
@@ -1000,7 +1009,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                             color: Colors.grey[600],
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           showArchive
                             ? 'No users have been archived yet'
@@ -1017,7 +1026,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
                     ),
                   )
                 : ListView.builder(
-                    padding: EdgeInsets.only(bottom: 16),
+                    padding: const EdgeInsets.only(bottom: 16),
                     itemCount: filteredUsers.length,
                     itemBuilder: (context, index) {
                       return UserCard(
@@ -1037,16 +1046,16 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
               _showRestoreOptionsDialog();
             },
             backgroundColor: Colors.green,
-            icon: Icon(Icons.restore, color: Colors.white),
-            label: Text('Restore Users', style: TextStyle(color: Colors.white)),
+            icon: const Icon(Icons.restore, color: Colors.white),
+            label: const Text('Restore Users', style: TextStyle(color: Colors.white)),
           )
         : FloatingActionButton.extended(
             onPressed: () {
               _showBulkActionsDialog();
             },
-            backgroundColor: Color(0xFF517690),
-            icon: Icon(Icons.settings, color: Colors.white),
-            label: Text('Bulk Actions', style: TextStyle(color: Colors.white)),
+            backgroundColor: const Color(0xFF517690),
+            icon: const Icon(Icons.settings, color: Colors.white),
+            label: const Text('Bulk Actions', style: TextStyle(color: Colors.white)),
           ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
@@ -1054,18 +1063,34 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
           setState(() {
             _currentIndex = index;
           });
-          _handleNavigation(index);
+          switch (index) {
+            case 0:
+              Navigator.pushNamedAndRemoveUntil(context, '/dashboard', (route) => false);
+              break;
+            case 1:
+              Navigator.pushNamedAndRemoveUntil(context, '/requests', (route) => false);
+              break;
+            case 2:
+              Navigator.pushNamed(context, '/search');
+              break;
+            case 3:
+              // Already on Users screen
+              break;
+            case 4:
+              Navigator.pushNamed(context, '/entry-logs');
+              break;
+          }
         },
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
-        selectedItemColor: Color(0xFF517690),
+        selectedItemColor: const Color(0xFF517690),
         unselectedItemColor: Colors.grey,
-        selectedLabelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-        unselectedLabelStyle: TextStyle(fontSize: 12),
-        items: [
+        selectedLabelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
+        unselectedLabelStyle: const TextStyle(fontSize: 12),
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            label: 'Home',
+            label: 'Dashboard',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.description),
@@ -1096,7 +1121,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
 
   Widget _buildStatusSummaryCard(String title, int count, Color color, IconData icon) {
     return Container(
-      padding: EdgeInsets.all(12),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: color.withOpacity(0.1),
         borderRadius: BorderRadius.circular(8),
@@ -1105,7 +1130,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
       child: Column(
         children: [
           Icon(icon, color: color, size: 24),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           Text(
             count.toString(),
             style: TextStyle(
@@ -1114,7 +1139,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
               color: color,
             ),
           ),
-          SizedBox(height: 4),
+          const SizedBox(height: 4),
           Text(
             title,
             style: TextStyle(

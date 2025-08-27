@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../shared/models/entry_log.dart';
 import '../../shared/components/entry_log_card.dart';
 import '../../shared/components/entry_log_filter_buttons.dart';
 
 class EntryLogsScreen extends StatefulWidget {
+  const EntryLogsScreen({super.key});
+
   @override
-  _EntryLogsScreenState createState() => _EntryLogsScreenState();
+  EntryLogsScreenState createState() => EntryLogsScreenState();
 }
 
-class _EntryLogsScreenState extends State<EntryLogsScreen> {
+class EntryLogsScreenState extends State<EntryLogsScreen> {
   final TextEditingController _searchController = TextEditingController();
   String selectedFilter = 'This Week';
   List<EntryLog> filteredLogs = [];
@@ -76,8 +79,8 @@ class _EntryLogsScreenState extends State<EntryLogsScreen> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('$feature feature coming soon!'),
-        duration: Duration(seconds: 2),
-        backgroundColor: Color(0xFF517690),
+        duration: const Duration(seconds: 2),
+        backgroundColor: const Color(0xFF517690),
       ),
     );
   }
@@ -86,12 +89,12 @@ class _EntryLogsScreenState extends State<EntryLogsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Entry Logs'),
-        backgroundColor: Color(0xFF517690),
+        title: Text('Entry Logs', style: GoogleFonts.montserrat()),
+        backgroundColor: const Color(0xFF517690),
         foregroundColor: Colors.white,
         actions: [
           IconButton(
-            icon: Icon(Icons.person_outline),
+            icon: const Icon(Icons.person_outline),
             onPressed: () {
               _showComingSoon('Profile');
             },
@@ -102,7 +105,7 @@ class _EntryLogsScreenState extends State<EntryLogsScreen> {
         children: [
           // Search bar
           Container(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             color: Colors.grey.shade50,
             child: TextField(
               controller: _searchController,
@@ -120,11 +123,11 @@ class _EntryLogsScreenState extends State<EntryLogsScreen> {
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
-                  borderSide: BorderSide(color: Color(0xFF517690)),
+                  borderSide: const BorderSide(color: Color(0xFF517690)),
                 ),
-                contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
                 hintText: 'Search entry logs...',
-                hintStyle: TextStyle(color: Colors.grey[500]),
+                hintStyle: TextStyle(color: Colors.grey[500], fontFamily: 'Montserrat'),
                 prefixIcon: Icon(Icons.search, color: Colors.grey[600]),
                 suffixIcon: _searchController.text.isNotEmpty
                     ? IconButton(
@@ -148,12 +151,12 @@ class _EntryLogsScreenState extends State<EntryLogsScreen> {
           // Results info
           if (filteredLogs.isNotEmpty)
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
               color: Colors.grey.shade50,
               child: Row(
                 children: [
                   Icon(Icons.list, size: 16, color: Colors.grey[600]),
-                  SizedBox(width: 8),
+                  const SizedBox(width: 8),
                   Text(
                     'Showing ${filteredLogs.length} entry log${filteredLogs.length != 1 ? 's' : ''} • $selectedFilter',
                     style: TextStyle(
@@ -180,7 +183,7 @@ class _EntryLogsScreenState extends State<EntryLogsScreen> {
                           size: 64,
                           color: Colors.grey[400],
                         ),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 16),
                         Text(
                           _searchController.text.isNotEmpty 
                             ? 'No logs found' 
@@ -189,9 +192,10 @@ class _EntryLogsScreenState extends State<EntryLogsScreen> {
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.grey[600],
+                            fontFamily: 'Montserrat',
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           _searchController.text.isNotEmpty
                             ? 'Try a different search term or adjust your filters'
@@ -199,6 +203,7 @@ class _EntryLogsScreenState extends State<EntryLogsScreen> {
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey[500],
+                            fontFamily: 'Montserrat',
                           ),
                           textAlign: TextAlign.center,
                         ),
@@ -206,7 +211,7 @@ class _EntryLogsScreenState extends State<EntryLogsScreen> {
                     ),
                   )
                 : ListView.builder(
-                    padding: EdgeInsets.only(bottom: 16),
+                    padding: const EdgeInsets.only(bottom: 16),
                     itemCount: filteredLogs.length,
                     itemBuilder: (context, index) {
                       return EntryLogCard(log: filteredLogs[index]);
@@ -225,11 +230,11 @@ class _EntryLogsScreenState extends State<EntryLogsScreen> {
         },
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
-        selectedItemColor: Color(0xFF517690),
+        selectedItemColor: const Color(0xFF517690),
         unselectedItemColor: Colors.grey,
-        selectedLabelStyle: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),
-        unselectedLabelStyle: TextStyle(fontSize: 12),
-        items: [
+        selectedLabelStyle: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, fontFamily: 'Montserrat'),
+        unselectedLabelStyle: const TextStyle(fontSize: 12, fontFamily: 'Montserrat'),
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Home',

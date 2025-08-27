@@ -6,11 +6,11 @@ class SearchTextField extends StatelessWidget {
   final VoidCallback? onClear;
 
   const SearchTextField({
-    Key? key, 
+    super.key, 
     required this.controller,
     this.onChanged,
     this.onClear,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +23,12 @@ class SearchTextField extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide.none,
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
         hintText: 'Search Request ID (e.g., 2022-172259)',
-        prefixIcon: Icon(Icons.search),
+        prefixIcon: const Icon(Icons.search),
         suffixIcon: controller.text.isNotEmpty 
           ? IconButton(
-              icon: Icon(Icons.clear),
+              icon: const Icon(Icons.clear),
               onPressed: () {
                 controller.clear();
                 if (onChanged != null) onChanged!('');

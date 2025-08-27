@@ -6,17 +6,17 @@ class StatusDropdown extends StatelessWidget {
   final Function(String?) onChanged;
 
   const StatusDropdown({
-    Key? key,
+    super.key,
     required this.statuses,
     required this.selectedStatus,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade400),
         borderRadius: BorderRadius.circular(8),
@@ -27,8 +27,8 @@ class StatusDropdown extends StatelessWidget {
           value: selectedStatus,
           items: statuses
               .map((s) => DropdownMenuItem(
-                    child: Text(s),
                     value: s,
+                    child: Text(s),
                   ))
               .toList(),
           onChanged: onChanged,

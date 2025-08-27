@@ -8,17 +8,17 @@ class UserCard extends StatelessWidget {
   final Function(int) onToggleStatus;
 
   const UserCard({
-    Key? key,
+    super.key,
     required this.user,
     required this.index,
     required this.onEdit,
     required this.onToggleStatus,
-  }) : super(key: key);
+  });
 
   Color getStatusColor(String status) {
     switch (status) {
       case 'Active':
-        return Color(0xFF517690);
+        return const Color(0xFF517690);
       case 'Inactive':
         return Colors.red;
       default:
@@ -31,7 +31,7 @@ class UserCard extends StatelessWidget {
       case 'Admin':
         return Colors.purple;
       case 'User':
-        return Color(0xFF517690);
+        return const Color(0xFF517690);
       default:
         return Colors.grey;
     }
@@ -44,14 +44,14 @@ class UserCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
+      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       elevation: 3,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
         side: BorderSide(color: Colors.grey.shade300),
       ),
       child: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             // Header with avatar and basic info
@@ -59,26 +59,26 @@ class UserCard extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 28,
-                  backgroundColor: Color(0xFF517690).withOpacity(0.1),
+                  backgroundColor: const Color(0xFF517690).withOpacity(0.1),
                   child: Icon(
                     getUserIcon(user.isFemale),
                     size: 32,
-                    color: Color(0xFF517690),
+                    color: const Color(0xFF517690),
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         user.name,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         user.email,
                         style: TextStyle(
@@ -86,7 +86,7 @@ class UserCard extends StatelessWidget {
                           color: Colors.grey[600],
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
                         'ID: ${user.id}',
                         style: TextStyle(
@@ -100,7 +100,7 @@ class UserCard extends StatelessWidget {
                 ),
                 // Status badge
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                   decoration: BoxDecoration(
                     color: getStatusColor(user.status).withOpacity(0.1),
                     borderRadius: BorderRadius.circular(16),
@@ -118,11 +118,11 @@ class UserCard extends StatelessWidget {
               ],
             ),
             
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             
             // User details
             Container(
-              padding: EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.grey.shade50,
                 borderRadius: BorderRadius.circular(8),
@@ -139,13 +139,13 @@ class UserCard extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 12),
+                  const SizedBox(height: 12),
                   _buildDetailRow(Icons.calendar_today, 'Joined', user.joinDate),
                 ],
               ),
             ),
             
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             
             // Action buttons
             Row(
@@ -153,16 +153,16 @@ class UserCard extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton.icon(
                     onPressed: () => onEdit(index),
-                    icon: Icon(Icons.edit, size: 18),
-                    label: Text('Edit'),
+                    icon: const Icon(Icons.edit, size: 18),
+                    label: const Text('Edit'),
                     style: OutlinedButton.styleFrom(
-                      foregroundColor: Color(0xFF517690),
-                      side: BorderSide(color: Color(0xFF517690)),
-                      padding: EdgeInsets.symmetric(vertical: 12),
+                      foregroundColor: const Color(0xFF517690),
+                      side: const BorderSide(color: Color(0xFF517690)),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                   ),
                 ),
-                SizedBox(width: 12),
+                const SizedBox(width: 12),
                 Expanded(
                   child: ElevatedButton.icon(
                     onPressed: () => onToggleStatus(index),
@@ -174,7 +174,7 @@ class UserCard extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: user.status == 'Active' ? Colors.red : Colors.green,
                       foregroundColor: Colors.white,
-                      padding: EdgeInsets.symmetric(vertical: 12),
+                      padding: const EdgeInsets.symmetric(vertical: 12),
                     ),
                   ),
                 ),
@@ -198,7 +198,7 @@ class UserCard extends StatelessWidget {
             color: Colors.grey[600],
           ),
         ),
-        SizedBox(height: 2),
+        const SizedBox(height: 2),
         Text(
           value,
           style: TextStyle(
@@ -215,7 +215,7 @@ class UserCard extends StatelessWidget {
     return Row(
       children: [
         Icon(icon, size: 16, color: Colors.grey[600]),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         Text(
           '$label: ',
           style: TextStyle(
@@ -227,7 +227,7 @@ class UserCard extends StatelessWidget {
         Expanded(
           child: Text(
             value,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.black87,
               fontSize: 13,
             ),

@@ -5,13 +5,13 @@ import '../../shared/components/confirmation_dialog.dart';
 class ReviewRequestScreen extends StatefulWidget {
   final String requestId;
   
-  const ReviewRequestScreen({Key? key, required this.requestId}) : super(key: key);
+  const ReviewRequestScreen({super.key, required this.requestId});
 
   @override
-  _ReviewRequestScreenState createState() => _ReviewRequestScreenState();
+  ReviewRequestScreenState createState() => ReviewRequestScreenState();
 }
 
-class _ReviewRequestScreenState extends State<ReviewRequestScreen> {
+class ReviewRequestScreenState extends State<ReviewRequestScreen> {
   final TextEditingController _adminCommentController = TextEditingController();
 
   @override
@@ -60,41 +60,41 @@ class _ReviewRequestScreenState extends State<ReviewRequestScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final String requesterName = "Alice Johnson";
-    final String requesterEmail = "alice.j@entrypass.com";
-    final String userRole = "User";
+    const String requesterName = "Alice Johnson";
+    const String requesterEmail = "alice.j@entrypass.com";
+    const String userRole = "User";
 
     final String requestId = widget.requestId;
-    final String status = "Approved";
-    final String submissionDate = "2024-07-20";
-    final String securedBy = "2024-07-27";
+    const String status = "Approved";
+    const String submissionDate = "2024-07-20";
+    const String securedBy = "2024-07-27";
 
-    final String equipmentDetails = "Laptop (Lenovo ThinkPad)";
-    final int quantity = 1;
-    final String destination = "ComLab 502";
-    final String purpose = ""; // Empty string since no purpose shown
+    const String equipmentDetails = "Laptop (Lenovo ThinkPad)";
+    const int quantity = 1;
+    const String destination = "ComLab 502";
+    const String purpose = ""; // Empty string since no purpose shown
 
-    final String entryScheduleDate = "October 26, 2023";
-    final String entryScheduleTime = "09:00 AM - 05:00 PM";
-    final String entryScheduleLocation = "ComLab 501";
+    const String entryScheduleDate = "October 26, 2023";
+    const String entryScheduleTime = "09:00 AM - 05:00 PM";
+    const String entryScheduleLocation = "ComLab 501";
 
-    final String previousAdminNotes =
+    const String previousAdminNotes =
         "Initial review complete. Awaiting additional details on material usage. Contacted requester for clarification.";
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Request Details'),
+        title: const Text('Request Details'),
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Card(
           shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12)),
           elevation: 4,
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -104,34 +104,34 @@ class _ReviewRequestScreenState extends State<ReviewRequestScreen> {
                     CircleAvatar(
                       radius: 28,
                       backgroundColor: Colors.blue.shade100,
-                      child: Icon(Icons.person, size: 40, color: Colors.blue),
+                      child: const Icon(Icons.person, size: 40, color: Colors.blue),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(requesterName,
+                          const Text(requesterName,
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold)),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Text(requesterEmail,
                               style: TextStyle(
                                   fontSize: 14, color: Colors.grey[600])),
                         ],
                       ),
                     ),
-                    Text(userRole,
+                    const Text(userRole,
                         style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.w600,
                             color: Colors.black54)),
                   ],
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
 
                 // Request ID and Status Row
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Request ID",
@@ -145,8 +145,8 @@ class _ReviewRequestScreenState extends State<ReviewRequestScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(requestId, style: TextStyle(fontSize: 14)),
-                    Text(status,
+                    Text(requestId, style: const TextStyle(fontSize: 14)),
+                    const Text(status,
                         style: TextStyle(
                             fontSize: 14,
                             color: status == "Approved"
@@ -157,10 +157,10 @@ class _ReviewRequestScreenState extends State<ReviewRequestScreen> {
                             fontWeight: FontWeight.w600)),
                   ],
                 ),
-                SizedBox(height: 12),
+                const SizedBox(height: 12),
 
                 // Submission Date and Secured By Row
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text("Submission Date",
@@ -171,14 +171,14 @@ class _ReviewRequestScreenState extends State<ReviewRequestScreen> {
                             fontWeight: FontWeight.w600, fontSize: 14)),
                   ],
                 ),
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(submissionDate, style: TextStyle(fontSize: 14)),
                     Text(securedBy, style: TextStyle(fontSize: 14)),
                   ],
                 ),
-                Divider(height: 32, thickness: 1),
+                const Divider(height: 32, thickness: 1),
 
                 // Equipment Details & Entry Schedule
                 Row(
@@ -189,34 +189,34 @@ class _ReviewRequestScreenState extends State<ReviewRequestScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Equipment Details",
+                          const Text("Equipment Details",
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 16)),
-                          SizedBox(height: 8),
-                          Text(equipmentDetails, style: TextStyle(fontSize: 14)),
-                          SizedBox(height: 8),
-                          Text("Quantity",
+                          const SizedBox(height: 8),
+                          const Text(equipmentDetails, style: TextStyle(fontSize: 14)),
+                          const SizedBox(height: 8),
+                          const Text("Quantity",
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 14)),
-                          Text(quantity.toString(), style: TextStyle(fontSize: 14)),
-                          SizedBox(height: 8),
-                          Text("Destination",
+                          Text(quantity.toString(), style: const TextStyle(fontSize: 14)),
+                          const SizedBox(height: 8),
+                          const Text("Destination",
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 14)),
-                          Text(destination, style: TextStyle(fontSize: 14)),
-                          SizedBox(height: 8),
-                          Text("Purpose",
+                          const Text(destination, style: TextStyle(fontSize: 14)),
+                          const SizedBox(height: 8),
+                          const Text("Purpose",
                               style: TextStyle(
                                   fontWeight: FontWeight.w600, fontSize: 14)),
-                          Text(purpose.isNotEmpty ? purpose : "-", style: TextStyle(fontSize: 14)),
+                          Text(purpose.isNotEmpty ? purpose : "-", style: const TextStyle(fontSize: 14)),
                         ],
                       ),
                     ),
 
-                    SizedBox(width: 24),
+                    const SizedBox(width: 24),
 
                     // Right Column - Entry Schedule
-                    Expanded(
+                    const Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -233,56 +233,56 @@ class _ReviewRequestScreenState extends State<ReviewRequestScreen> {
                   ],
                 ),
 
-                Divider(height: 32, thickness: 1),
+                const Divider(height: 32, thickness: 1),
 
                 // Previous Admin Notes
-                Text("Previous Admin Notes",
+                const Text("Previous Admin Notes",
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
-                SizedBox(height: 8),
-                Text(previousAdminNotes, style: TextStyle(fontSize: 14)),
-                SizedBox(height: 24),
+                const SizedBox(height: 8),
+                const Text(previousAdminNotes, style: TextStyle(fontSize: 14)),
+                const SizedBox(height: 24),
 
                 // Admin Comments Input
-                Text("Admin Comments (Optional)",
+                const Text("Admin Comments (Optional)",
                     style:
                         TextStyle(fontWeight: FontWeight.w600, fontSize: 16)),
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextField(
                   controller: _adminCommentController,
                   maxLines: 3,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     border: OutlineInputBorder(),
                     hintText: 'Add your comments here...',
                   ),
                 ),
-                SizedBox(height: 24),
+                const SizedBox(height: 24),
 
                 // Approve and Reject buttons
                 Row(
                   children: [
                     Expanded(
                       child: ElevatedButton.icon(
-                        icon: Icon(Icons.check),
-                        label: Text('Approve'),
+                        icon: const Icon(Icons.check),
+                        label: const Text('Approve'),
                         onPressed: _approveRequest,
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF517690),
+                          backgroundColor: const Color(0xFF517690),
                           foregroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(vertical: 16),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
                       ),
                     ),
-                    SizedBox(width: 16),
+                    const SizedBox(width: 16),
                     Expanded(
                       child: ElevatedButton.icon(
-                        icon: Icon(Icons.close),
-                        label: Text('Reject'),
+                        icon: const Icon(Icons.close),
+                        label: const Text('Reject'),
                         onPressed: _rejectRequest,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.red,
                           foregroundColor: Colors.white,
-                          padding: EdgeInsets.symmetric(vertical: 16),
+                          padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
                       ),
                     ),

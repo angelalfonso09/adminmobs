@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'app_theme.dart';
-import '../../features/requests/all_requests_screen.dart';
+import '../components/app_theme.dart';
+import '../../features/requests/models/request.dart';
 
 class RequestDetailsModal extends StatelessWidget {
   final Request request;
 
-  const RequestDetailsModal({Key? key, required this.request}) : super(key: key);
+  const RequestDetailsModal({super.key, required this.request});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.8,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
@@ -19,7 +19,7 @@ class RequestDetailsModal extends StatelessWidget {
         children: [
           // Handle bar
           Container(
-            margin: EdgeInsets.only(top: 8),
+            margin: const EdgeInsets.only(top: 8),
             width: 40,
             height: 4,
             decoration: BoxDecoration(
@@ -30,8 +30,8 @@ class RequestDetailsModal extends StatelessWidget {
           
           // Header
           Container(
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
+            padding: const EdgeInsets.all(16),
+            decoration: const BoxDecoration(
               border: Border(bottom: BorderSide(color: AppColors.divider)),
             ),
             child: Row(
@@ -42,7 +42,7 @@ class RequestDetailsModal extends StatelessWidget {
                   style: AppTextStyles.heading.copyWith(fontSize: 22),
                 ),
                 IconButton(
-                  icon: Icon(Icons.close),
+                  icon: const Icon(Icons.close),
                   onPressed: () => Navigator.of(context).pop(),
                 ),
               ],
@@ -52,7 +52,7 @@ class RequestDetailsModal extends StatelessWidget {
           // Content
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(24),
+              padding: const EdgeInsets.all(24),
               child: Column(
                 children: [
                   // User Avatar
@@ -67,7 +67,7 @@ class RequestDetailsModal extends StatelessWidget {
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           // Fallback to icon if image fails to load
-                          return Icon(
+                          return const Icon(
                             Icons.person, 
                             size: 50, 
                             color: AppColors.primary
@@ -76,18 +76,18 @@ class RequestDetailsModal extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(height: 32),
+                  const SizedBox(height: 32),
                   
                   _buildDetailItem('Requester', request.requester),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   _buildDetailItem('Request ID', request.id),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   _buildDetailItem('Status', request.status, isStatus: true),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   _buildDetailItem('Equipment Type', request.equipmentType),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   _buildDetailItem('Quantity', request.quantity.toString()),
-                  SizedBox(height: 24),
+                  const SizedBox(height: 24),
                   _buildDetailItem('Date', request.date),
                 ],
               ),
@@ -97,8 +97,8 @@ class RequestDetailsModal extends StatelessWidget {
           // Review Request Button
           if (request.status.toLowerCase() == 'pending')
             Container(
-              padding: EdgeInsets.all(24),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(24),
+              decoration: const BoxDecoration(
                 border: Border(top: BorderSide(color: AppColors.divider)),
               ),
               child: SizedBox(
@@ -110,12 +110,12 @@ class RequestDetailsModal extends StatelessWidget {
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                    padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Review Request',
                     style: TextStyle(
                       color: Colors.white,
@@ -142,7 +142,7 @@ class RequestDetailsModal extends StatelessWidget {
             fontSize: 16,
           ),
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Text(
           value,
           style: AppTextStyles.cardBody.copyWith(

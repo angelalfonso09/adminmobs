@@ -107,7 +107,7 @@ class EntryLogData {
         startDate = DateTime(now.year, now.month, now.day);
         break;
       case 'This Week':
-        startDate = now.subtract(Duration(days: 7));
+        startDate = now.subtract(const Duration(days: 7));
         break;
       case 'This Month':
         startDate = DateTime(now.year, now.month, 1);

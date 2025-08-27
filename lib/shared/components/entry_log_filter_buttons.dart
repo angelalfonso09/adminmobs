@@ -5,15 +5,15 @@ class EntryLogFilterButtons extends StatelessWidget {
   final Function(String) onFilterSelected;
 
   const EntryLogFilterButtons({
-    Key? key,
+    super.key,
     required this.selectedFilter,
     required this.onFilterSelected,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
       child: Row(
         children: [
           _buildFilterButton('Today'),
@@ -31,12 +31,12 @@ class EntryLogFilterButtons extends StatelessWidget {
         onTap: () => onFilterSelected(label),
         child: Container(
           height: 40,
-          margin: EdgeInsets.symmetric(horizontal: 4),
+          margin: const EdgeInsets.symmetric(horizontal: 4),
           decoration: BoxDecoration(
-            color: isSelected ? Color(0xFF517690) : Colors.grey.shade200,
+            color: isSelected ? const Color(0xFF517690) : Colors.grey.shade200,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: isSelected ? Color(0xFF517690) : Colors.grey.shade300,
+              color: isSelected ? const Color(0xFF517690) : Colors.grey.shade300,
             ),
           ),
           alignment: Alignment.center,

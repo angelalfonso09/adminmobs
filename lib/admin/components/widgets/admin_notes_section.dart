@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_theme.dart';
+import '../../../shared/components/app_theme.dart';
 
 class AdminNotesSection extends StatelessWidget {
   final String previousNotes;
